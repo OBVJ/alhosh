@@ -1,0 +1,5 @@
+<script>start("c:\\xampp\\htdocs\\alhosh\\resources\\");</script>
+<script>onHasParentDirectory();</script>
+<script>addRow("css","css",1,0,"0 B",1739296824,"2/11/25, 10:00:24 AM");</script>
+<script>addRow("js","js",1,0,"0 B",1739296755,"2/11/25, 9:59:15 AM");</script>
+<script>addRow("views","views",1,0,"0 B",1739166263,"2/9/25, 9:44:23 PM");</script>
