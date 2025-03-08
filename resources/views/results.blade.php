@@ -1,5 +1,5 @@
 @extends('layout.apps')
-@section('title','نتائج البحث')
+@section('title', 'نتائج البحث')
 
 @section('content')
     <div class="container mt-5">
@@ -13,8 +13,8 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        @if (isset($car))
-            <h3 class="mt-5">النتيجة</h3>
+        @if (isset($cars) && count($cars) > 0)
+            <h3 class="mt-5">نتائج البحث</h3>
             <table class="table table-bordered table-hover table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -22,19 +22,32 @@
                         <th>الموديل</th>
                         <th>اللون</th>
                         <th>مكان العثور</th>
+                        <th>قسم الشرطة</th>
+                        <th>الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{{ $car->chassis_number }}</td>
-                        <td>{{ $car->model }}</td>
-                        <td>{{ $car->color }}</td>
-                        <td>{{ $car->found_location }}</td>
-                    </tr>
+                    @foreach ($cars as $car)
+                        <tr>
+                            <td>{{ $car->chassis_number }}</td>
+                            <td>{{ $car->model }}</td>
+                            <td>{{ $car->color }}</td>
+                            <td>{{ $car->found_location }}</td>
+                            <td>{{ $car->policeStation->name ?? 'غير محدد' }}</td>
+                            <td>
+                                <a href="{{ route('edit-car', $car->id) }}">تعديل</a>
+                                <form action="{{ route('delete-car', $car->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         @else
-            <p class="alert alert-danger">لم يتم العثور على أي سيارة.</p>
+            <p>لا توجد نتائج للبحث.</p>
         @endif
     </div>
 @endsection

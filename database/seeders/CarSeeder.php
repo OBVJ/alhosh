@@ -12,11 +12,18 @@ class CarSeeder extends Seeder
      */
     public function run(): void
     {
-        Car::create([
+        Car::factory()->create([
             'chassis_number' => '1234567890',
             'model' => 'toyota',
             'color' => 'black',
             'found_location' => 'kafori'
+        ]);
+
+        Car::factory()->create([
+            'chassis_number' => '1234567891',
+            'model' => 'nisan',
+            'color' => 'yellow',
+            'found_location' => 'almzad'
         ]);
         
     }

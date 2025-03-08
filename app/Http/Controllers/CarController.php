@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PoliceStation;
 use Illuminate\Http\Request;
 use App\Models\Car;
 
@@ -10,13 +11,15 @@ class CarController extends Controller
     // عرض الصفحة الرئيسية
     public function index()
     {
-        return view('index');
+        $cars = Car::with('policeStation')->get();
+        return view('index',compact('cars'));
     }
 
     // عرض صفحة إدخال السيارات
     public function create()
     {
-        return view('add-car');
+        $PoliceStation = PoliceStation::all();
+        return view('add-car', compact('PoliceStation'));
     }
 
     // حفظ بيانات السيارات في قاعدة البيانات
@@ -28,6 +31,7 @@ class CarController extends Controller
             'model' => 'required|string|max:50',
             'color' => 'required|string|max:30',
             'found_location' => 'required|string|max:100',
+            'police_station_id' => 'required|exists:police_stations,id',
         ], [
             'chassis_number.required' => 'رقم الشاسيه مطلوب',
             'chassis_number.unique' => 'رقم الشاسيه موجود بالفعل',
@@ -38,15 +42,21 @@ class CarController extends Controller
             'color.max' => 'اللون يجب أن لا يزيد عن 30 حرف',
             'found_location.required' => 'مكان العثور مطلوب',
             'found_location.max' => 'مكان العثور يجب أن لا يزيد عن 100 حرف',
+        'police_station_id.required' => 'يجب اختيار مركز الشرطة',
+        'police_station_id.exists' => 'مركز الشرطة غير موجود',
+        
+        
         ]);
 
         try {
+            
             // إنشاء السيارة الجديدة
             Car::create([
                 'chassis_number' => $request->chassis_number,
                 'model' => $request->model,
                 'color' => $request->color,
                 'found_location' => $request->found_location,
+                'police_station_id' => $request->police_station_id,
             ]);
 
             // إرسال رسالة نجاح
@@ -90,13 +100,9 @@ class CarController extends Controller
     // دالة تعديل السيارة
     public function edit($id)
     {
-        $car = Car::find($id);
-
-        if (!$car) {
-            return redirect()->back()->with('error', 'لم يتم العثور على السيارة');
-        }
-
-        return view('admin.edit-car', compact('car'));
+        $car = Car::findOrFail($id);
+        $policeStations = PoliceStation::all();
+        return view('admin.edit-car', compact('car', 'policeStations'));
     }
 
     public function update(Request $request, $id)
@@ -106,6 +112,7 @@ class CarController extends Controller
             'model' => 'required',
             'color' => 'required',
             'found_location' => 'required',
+            'police_station_id' => 'required|exists:police_stations,id',
         ]);
 
         $car = Car::find($id);

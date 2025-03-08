@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Car;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {

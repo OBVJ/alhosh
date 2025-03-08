@@ -17,7 +17,7 @@
         @if (isset($car))
             <form action="{{ route('update-car', $car->id) }}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
 
                 <div class="mb-3">
                     <label class="form-label">رقم الشاسيه:</label>
@@ -37,6 +37,15 @@
                 <div class="mb-3">
                     <label class="form-label">مكان العثور عليها:</label>
                     <input type="text" class="form-control" name="found_location" value="{{ $car->found_location }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"> عنوان قسم الشرطه:</label>
+                    <select name="police_station_id" class="form-control" id="police_station">
+                        @foreach ($policeStation as $station)
+                            <option value="{{ $station->id }}" {{ $car->police_station_id == $station->id ? 'selected' : '' }}>{{ $station->address }}</option>
+                        @endforeach
+                    </select>
+                  
                 </div>
                 <button type="submit" class="btn btn-success">تحديث</button>
             </form>

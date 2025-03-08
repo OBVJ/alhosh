@@ -8,9 +8,10 @@
     <!-- ربط ملف CSS مخصص (إذا كان موجودًا) -->
     <link rel="stylesheet" href="\assets\css\bootstrap.min.css">
     <link rel="stylesheet" href="\assets\bootstrap-icons-1.11.3\font\bootstrap-icons.min.css">
+    
 </head>    
     <body dir="rtl">
-    
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('index') }}">البحث عن السيارات المفقودة</a>

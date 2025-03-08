@@ -16,6 +16,7 @@
                 <th>الموديل</th>
                 <th>اللون</th>
                 <th>مكان العثور</th>
+                <th>قسم الشرطة</th>
                 <th>الإجراءات</th>
             </tr>
         </thead>
@@ -26,9 +27,10 @@
                     <td>{{ $car->model }}</td>
                     <td>{{ $car->color }}</td>
                     <td>{{ $car->found_location }}</td>
+                    <td>{{$car->policeStation->name ?? 'غير محدد'}}</td>
                     <td>
-                        <a href="{{ route('edit.car', $car->id) }}" class="btn btn-warning btn-sm">تعديل</a>
-                        <form action="{{ route('car.destroy', $car->id) }}" method="POST" style="display:inline-block;">
+                        <a href="{{ route('edit-car', $car->id) }}" class="btn btn-warning btn-sm">تعديل</a>
+                        <form action="{{ route('delete-car', $car->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من حذف هذه السيارة؟')">حذف</button>

@@ -15,16 +15,15 @@
         @endif
 
         <form action="{{ route('search') }}" method="GET">
-    @csrf
-    <div class="mb-3">
-        <label for="chassis_number" class="form-label">أدخل رقم الشاسيه:</label>
-        <input type="text" class="form-control" id="chassis_number" name="chassis_number" required>
-        @if ($errors->has('chassis_number'))
-            <div class="alert alert-danger mt-2">{{ $errors->first('chassis_number') }}</div>
-        @endif
-    </div>
-    <button type="submit" class="btn btn-primary">بحث</button>
-</form>
+            <div class="mb-3">
+                <label for="chassis_number" class="form-label">أدخل رقم الشاسيه:</label>
+                <input type="text" class="form-control" id="chassis_number" name="chassis_number" required>
+                @if ($errors->has('chassis_number'))
+                    <div class="alert alert-danger mt-2">{{ $errors->first('chassis_number') }}</div>
+                @endif
+            </div>
+            <button type="submit" class="btn btn-primary">بحث</button>
+        </form>
 
         @if (isset($car))
             <h3 class="mt-5">نتائج البحث</h3>

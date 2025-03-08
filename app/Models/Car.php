@@ -14,5 +14,12 @@ class Car extends Model
         'model',
         'color',
         'found_location',
+        'police_station_id',
     ];
+
+    public function policeStation()
+    {
+        return $this->belongsTo(PoliceStation::class, 'police_station_id');
+    }
 }
+
