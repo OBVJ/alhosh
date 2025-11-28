@@ -2,7 +2,7 @@
     <!-- Session Status-->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     @extends('layout.apps')
-    @section('title', 'اضافة سيارة')
+    @section('title', 'تسجيل الدخول')
     
     @section('content')
     <form method="POST" action="{{ route('login') }}" class="bg-white p-4 rounded shadow-sm">

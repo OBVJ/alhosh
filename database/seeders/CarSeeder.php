@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 use App\Models\Car;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CarSeeder extends Seeder
@@ -12,19 +11,24 @@ class CarSeeder extends Seeder
      */
     public function run(): void
     {
-        Car::factory()->create([
+        // Use updateOrCreate to make seeding idempotent (avoid unique constraint failures)
+        Car::updateOrCreate([
             'chassis_number' => '1234567890',
+        ], [
             'model' => 'toyota',
             'color' => 'black',
-            'found_location' => 'kafori'
+            'found_location' => 'kafori',
+            'police_station_id' => 1,
         ]);
 
-        Car::factory()->create([
+        Car::updateOrCreate([
             'chassis_number' => '1234567891',
+        ], [
             'model' => 'nisan',
             'color' => 'yellow',
-            'found_location' => 'almzad'
+            'found_location' => 'almzad',
+            'police_station_id' => 2,
         ]);
-        
+
     }
 }
