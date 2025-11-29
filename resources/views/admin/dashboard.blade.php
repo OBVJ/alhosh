@@ -59,8 +59,14 @@
                             <a href="{{ route('add-car') }}" class="btn btn-primary btn-lg">
                                 <i class="bi bi-plus-circle-fill me-2"></i>إضافة سيارة
                             </a>
+                            <a href="{{ route('police-stations.create') }}" class="btn btn-secondary btn-lg">
+                                <i class="bi bi-building-add me-2"></i>إضافة قسم جديد
+                            </a>
                             <a href="{{ route('police-stations.index') }}" class="btn btn-success btn-lg">
                                 <i class="bi bi-building me-2"></i>إدارة الأقسام
+                            </a>
+                            <a href="{{ route('reports') }}" class="btn btn-warning btn-lg">
+                                <i class="bi bi-bar-chart-line me-2"></i>التقارير
                             </a>
                             <a href="{{ route('index') }}" class="btn btn-info btn-lg">
                                 <i class="bi bi-search me-2"></i>البحث عن سيارة
@@ -92,12 +98,28 @@
                             <td>{{ $car->found_location }}</td>
                             <td>{{ $car->policeStation->name ?? 'غير محدد' }}</td>
                             <td>
-                                <a href="{{ route('edit-car', $car->id) }}" class="btn btn-warning btn-sm me-2"><i class="bi bi-pencil"></i> تعديل</a>
-                                <form action="{{ route('delete-car', $car->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من حذف هذه السيارة؟')"><i class="bi bi-trash"></i> حذف</button>
-                                </form>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ route('edit-car', $car->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> تعديل</a>
+
+                                    @if($car->status === 'stored')
+                                        <form action="{{ route('cars.mark-delivered', $car->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('هل أنت متأكد من تأكيد تسليم هذه السيارة لصاحبها؟')">
+                                                <i class="bi bi-check-circle"></i> تم التسليم
+                                            </button>
+                                        </form>
+                                    @else
+                                        <span class="badge bg-success"><i class="bi bi-check-circle-fill me-1"></i>تم التسليم</span>
+                                    @endif
+
+                                    <form action="{{ route('delete-car', $car->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من حذف هذه السيارة؟')">
+                                            <i class="bi bi-trash"></i> حذف
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

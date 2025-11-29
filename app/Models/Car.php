@@ -13,7 +13,7 @@ class Car extends Model
 
     // تحديد الأعمدة التي يمكن تعبئتها بشكل جماعي
     protected $fillable = [
-        'chassis_number', 'model', 'color', 'found_location', 'police_station_id'
+        'chassis_number', 'model', 'color', 'found_location', 'police_station_id', 'status', 'found_at'
     ];
 
     // تعريف العلاقة مع مركز الشرطة (الـ PoliceStation)

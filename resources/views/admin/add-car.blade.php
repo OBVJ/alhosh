@@ -11,6 +11,12 @@
                         <p class="mb-0 mt-2 opacity-75">أدخل بيانات السيارة المفقودة لإضافتها إلى قاعدة البيانات</p>
                     </div>
                     <div class="card-body p-5">
+                        @if (session('success'))
+                            <div class="alert alert-success border-0 rounded-3 shadow-sm" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                            </div>
+                        @endif
+
                         @if (session('error'))
                             <div class="alert alert-danger border-0 rounded-3 shadow-sm" role="alert">
                                 <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}

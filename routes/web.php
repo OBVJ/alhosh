@@ -38,9 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-// مجموعة المسارات الخاصة بإدارة السيارات (متاحة فقط للمستخدمين ذوي صلاحيات المسؤول)
-// هنا يستخدم middleware "police_admin" لضمان أن العمليات مثل إضافة وتعديل وحذف السيارات تقتصر على المسؤولين.
-Route::middleware(['auth', 'police_admin'])->group(function () {
+// مجموعة المسارات الخاصة بإدارة السيارات (متاحة للمستخدمين المسجلين والمؤكدين)
+// هنا يستخدم middleware "auth" و "verified" لضمان توجيه المستخدمين المسجلين والمؤكدين
+Route::middleware(['auth', 'verified'])->group(function () {
     // صفحة إضافة سيارة جديدة
     Route::get('/add-car', [CarController::class, 'create'])->name('add-car');
     // حفظ بيانات السيارة
@@ -62,6 +62,12 @@ Route::middleware(['auth', 'police_admin'])->group(function () {
     Route::get('/police-stations/{id}/edit', [PoliceStationController::class, 'edit'])->name('police-stations.edit');
     Route::put('/police-stations/{id}', [PoliceStationController::class, 'update'])->name('police-stations.update');
     Route::delete('/police-stations/{id}', [PoliceStationController::class, 'destroy'])->name('police-stations.destroy');
+
+    // تأكيد تسليم السيارة لصاحبها
+    Route::post('/cars/{id}/mark-delivered', [CarController::class, 'markAsDelivered'])->name('cars.mark-delivered');
+
+    // صفحة التقارير
+    Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
 });
 
 // تحميل مسارات المصادقة (auth routes)

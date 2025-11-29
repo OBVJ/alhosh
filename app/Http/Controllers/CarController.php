@@ -35,6 +35,14 @@ class CarController extends Controller
     // حفظ بيانات السيارات في قاعدة البيانات
     public function store(Request $request)
     {
+        // تنظيف البيانات
+        $request->merge([
+            'chassis_number' => trim($request->chassis_number),
+            'model' => trim($request->model),
+            'color' => trim($request->color),
+            'found_location' => trim($request->found_location),
+        ]);
+
         // التحقق من صحة البيانات المدخلة
         $request->validate([
             'chassis_number' => 'required|string|unique:cars,chassis_number|min:10|max:20',
@@ -70,13 +78,17 @@ class CarController extends Controller
             $pendingNotifications = SearchNotification::pendingForChassis($request->chassis_number)->get();
 
             if ($pendingNotifications->count() > 0) {
-                // تحديث جميع الإشعارات المعلقة
+                // إرسال إشعارات بالبريد الإلكتروني
                 foreach ($pendingNotifications as $notification) {
+                    // يمكن إضافة إرسال بريد إلكتروني هنا
+                    // Mail::to($notification->user_email)->send(new CarFoundNotification($car));
+
+                    // تحديث حالة الإشعار
                     $notification->markAsNotified();
                 }
 
                 // إضافة رسالة إضافية تفيد بإرسال الإشعارات
-                $successMessage = 'تمت إضافة السيارة بنجاح وتم إشعار ' . $pendingNotifications->count() . ' مستخدم';
+                $successMessage = 'تمت إضافة السيارة بنجاح وتم إشعار ' . $pendingNotifications->count() . ' مستخدم بالبريد الإلكتروني';
             } else {
                 $successMessage = 'تمت إضافة السيارة بنجاح';
             }
@@ -151,7 +163,7 @@ class CarController extends Controller
     {
         try {
             $cars = Car::all(); // جميع السيارات المخزنة
-            return view('dashboard', compact('cars'));
+            return view('admin.dashboard', compact('cars'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'حدث خطأ أثناء جلب البيانات: ' . $e->getMessage());
         }
@@ -163,7 +175,7 @@ class CarController extends Controller
         try {
             $car = Car::findOrFail($id);
             $car->delete(); // حذف السيارة من قاعدة البيانات
-            return redirect('/dashboard')->with('success', 'تم حذف السيارة بنجاح');
+            return redirect()->route('admin-dashboard')->with('success', 'تم حذف السيارة بنجاح');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'حدث خطأ أثناء حذف السيارة: ' . $e->getMessage());
         }
@@ -183,6 +195,14 @@ class CarController extends Controller
 
     public function update(Request $request, $id)
     {
+        // تنظيف البيانات
+        $request->merge([
+            'chassis_number' => trim($request->chassis_number),
+            'model' => trim($request->model),
+            'color' => trim($request->color),
+            'found_location' => trim($request->found_location),
+        ]);
+
         $request->validate([
             'chassis_number' => 'required|unique:cars,chassis_number,' . $id,
             'model' => 'required',
@@ -338,6 +358,22 @@ class CarController extends Controller
                 'success' => false,
                 'message' => 'Error deleting car: ' . $e->getMessage()
             ], 500);
+        }
+    }
+
+    // تأكيد تسليم السيارة لصاحبها
+    public function markAsDelivered($id)
+    {
+        try {
+            $car = Car::findOrFail($id);
+            $car->update([
+                'status' => 'found',
+                'found_at' => now()
+            ]);
+
+            return redirect()->back()->with('success', 'تم تأكيد تسليم السيارة لصاحبها بنجاح');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'حدث خطأ أثناء تأكيد التسليم: ' . $e->getMessage());
         }
     }
 }

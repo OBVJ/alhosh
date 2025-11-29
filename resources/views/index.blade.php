@@ -26,6 +26,55 @@
                 </div>
             </div>
         </form>
+
+        <!-- Notification Subscription -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8 col-lg-6">
+                <div class="card bg-light border-info shadow-sm">
+                    <div class="card-body text-center">
+                        <h6 class="card-title text-info mb-2">
+                            <i class="bi bi-bell-fill me-2"></i>خدمة الإشعارات
+                        </h6>
+                        <p class="text-muted small mb-3">
+                            اشترك ليصلك إشعار فوري عند العثور على سيارتك المفقودة
+                        </p>
+                        <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                            <i class="bi bi-envelope-plus me-1"></i>اشتراك في الإشعارات
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Subscription Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">
+                        <i class="bi bi-bell me-2"></i>الاشتراك في خدمة الإشعارات
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">
+                        أدخل بريدك الإلكتروني وسيصلك إشعار فوري عندما تقوم الشرطة بتخزين سيارتك المفقودة.
+                    </p>
+                    <form action="{{ route('notifications') }}" method="GET">
+                        <div class="mb-3">
+                            <label for="modalEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="modalEmail" name="email" placeholder="example@email.com" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-bell-plus me-2"></i>اشتراك
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     @if (isset($car))

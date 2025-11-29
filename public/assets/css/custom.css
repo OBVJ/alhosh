@@ -3,10 +3,10 @@
 /* Global styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
     min-height: 100vh;
     margin: 0;
-    color: #212529;
+    color: #ecf0f1;
 }
 
 .container {
@@ -15,20 +15,20 @@ body {
 
 /* Navigation improvements */
 .navbar {
-    background: rgba(255, 255, 255, 0.95) !important;
+    background: rgba(44, 62, 80, 0.9) !important;
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .navbar-brand {
     font-weight: bold;
-    color: #2c3e50 !important;
+    color: #ecf0f1 !important;
     font-size: 1.5rem;
 }
 
 .navbar-nav .nav-link {
-    color: #2c3e50 !important;
+    color: #bdc3c7 !important;
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -39,16 +39,17 @@ body {
 
 /* Hero section for search */
 .search-hero {
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 73, 94, 0.8) 100%);
     border-radius: 20px;
     padding: 3rem 2rem;
     margin: 2rem 0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .search-hero h2 {
-    color: #2c3e50;
+    color: #ecf0f1;
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
