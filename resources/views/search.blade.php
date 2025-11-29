@@ -71,23 +71,24 @@
                             اشترك في خدمة الإشعارات وسيتم إشعارك فوراً عندما تقوم الشرطة بتخزين سيارتك
                         </p>
 
-                        <form action="{{ route('search') }}" method="GET" class="row g-3 justify-content-center">
+                        <form action="{{ route('search') }}" method="GET" class="row g-3 justify-content-center align-items-end">
                             <input type="hidden" name="chassis_number" value="{{ request('chassis_number') }}">
 
-                            <div class="col-md-4">
-                                <input type="email" class="form-control" name="user_email" placeholder="أدخل بريدك الإلكتروني (اختياري)" required>
+                            <div class="col-md-5">
+                                <label for="user_email" class="form-label fw-bold">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="user_email" name="user_email" placeholder="أدخل بريدك الإلكتروني" required>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-check d-flex align-items-center justify-content-center h-100">
+                            <div class="col-md-3">
+                                <div class="form-check d-flex align-items-center h-100">
                                     <input class="form-check-input me-2" type="checkbox" name="subscribe_notifications" value="1" id="subscribeCheck" checked>
-                                    <label class="form-check-label" for="subscribeCheck">
-                                        اشتراك
+                                    <label class="form-check-label fw-bold" for="subscribeCheck">
+                                        اشتراك في الإشعارات
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-warning w-100">
-                                    <i class="bi bi-bell me-2"></i>اشتراك في الإشعارات
+                                    <i class="bi bi-bell-plus-fill me-2"></i>اشتراك الآن
                                 </button>
                             </div>
                         </form>
