@@ -71,7 +71,7 @@
                             اشترك في خدمة الإشعارات وسيتم إشعارك فوراً عندما تقوم الشرطة بتخزين سيارتك
                         </p>
 
-                        <form action="{{ route('search') }}" method="GET" class="row g-3 justify-content-center align-items-end">
+                        <form action="{{ route('search') }}" method="GET" class="row g-3 justify-content-center align-items-end" id="subscriptionForm">
                             <input type="hidden" name="chassis_number" value="{{ request('chassis_number') }}">
 
                             <div class="col-md-5">
@@ -103,4 +103,16 @@
             </div>
         @endif
     </div>
+
+    <script>
+        document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+            const checkbox = document.getElementById('subscribeCheck');
+            if (!checkbox.checked) {
+                e.preventDefault();
+                alert('يرجى تحديد خيار الاشتراك في الإشعارات أولاً');
+                checkbox.focus();
+                return false;
+            }
+        });
+    </script>
 @endsection
