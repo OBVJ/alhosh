@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::table('cars', function (Blueprint $table) {
             if (!Schema::hasColumn('cars', 'police_station_id')) {
                 $table->unsignedBigInteger('police_station_id')->nullable()->after('found_location');
-                $table->foreign('police_station_id')->references('id')->on('police_station')->onDelete('set null');
+                $table->foreign('police_station_id')->references('id')->on('police_stations')->onDelete('set null');
             }
         });
     }

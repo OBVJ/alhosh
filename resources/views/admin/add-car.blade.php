@@ -1,5 +1,5 @@
 @extends('layout.apps')
-@section('title', 'تعديل السيارة')
+@section('title', 'إضافة سيارة جديدة')
 
 @section('content')
     <div class="container mt-5 fade-in">
@@ -7,8 +7,8 @@
             <div class="col-md-10 col-lg-8">
                 <div class="card shadow-lg border-0 rounded-4 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2);">
                     <div class="card-header text-center py-4 bg-primary text-white border-0 rounded-top">
-                        <h2 class="mb-0"><i class="bi bi-pencil-square me-2 fs-2"></i>تعديل بيانات السيارة</h2>
-                        <p class="mb-0 mt-2 opacity-75">قم بتحديث معلومات السيارة المفقودة</p>
+                        <h2 class="mb-0"><i class="bi bi-plus-circle-fill me-2 fs-2"></i>إضافة سيارة جديدة</h2>
+                        <p class="mb-0 mt-2 opacity-75">أدخل بيانات السيارة المفقودة لإضافتها إلى قاعدة البيانات</p>
                     </div>
                     <div class="card-body p-5">
                         @if (session('success'))
@@ -23,9 +23,8 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('update-car', $car->id) }}" method="POST" class="needs-validation" novalidate>
+                        <form action="{{ route('store-car') }}" method="POST" class="needs-validation" novalidate>
                             @csrf
-                            @method('PUT')
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -33,7 +32,7 @@
                                         <i class="bi bi-hash me-2 text-primary"></i>رقم الشاسيه
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="chassis_number" value="{{ $car->chassis_number }}" required style="border-color: #e1e8ed;">
+                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="chassis_number" placeholder="مثال: ABC123456789" required style="border-color: #e1e8ed;">
                                     <div class="invalid-feedback">
                                         يرجى إدخال رقم الشاسيه
                                     </div>
@@ -45,7 +44,7 @@
                                         <i class="bi bi-car-front me-2 text-primary"></i>الموديل
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="model" value="{{ $car->model }}" required style="border-color: #e1e8ed;">
+                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="model" placeholder="مثال: تويوتا كورولا" required style="border-color: #e1e8ed;">
                                     <div class="invalid-feedback">
                                         يرجى إدخال موديل السيارة
                                     </div>
@@ -58,7 +57,7 @@
                                         <i class="bi bi-palette me-2 text-primary"></i>اللون
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="color" value="{{ $car->color }}" required style="border-color: #e1e8ed;">
+                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="color" placeholder="مثال: أبيض" required style="border-color: #e1e8ed;">
                                     <div class="invalid-feedback">
                                         يرجى إدخال لون السيارة
                                     </div>
@@ -69,7 +68,7 @@
                                         <i class="bi bi-geo-alt me-2 text-primary"></i>مكان العثور
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="found_location" value="{{ $car->found_location }}" required style="border-color: #e1e8ed;">
+                                    <input type="text" class="form-control form-control-lg border-2 rounded-3 shadow-sm" name="found_location" placeholder="مثال: شارع الاستقلال" required style="border-color: #e1e8ed;">
                                     <div class="invalid-feedback">
                                         يرجى إدخال مكان العثور على السيارة
                                     </div>
@@ -84,9 +83,7 @@
                                 <select class="form-select form-select-lg border-2 rounded-3 shadow-sm" name="police_station_id" required style="border-color: #e1e8ed;">
                                     <option value="">اختر قسم الشرطة</option>
                                     @foreach($policeStations as $station)
-                                        <option value="{{ $station->id }}" {{ $car->police_station_id == $station->id ? 'selected' : '' }}>
-                                            {{ $station->name }}
-                                        </option>
+                                        <option value="{{ $station->id }}">{{ $station->name }}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
@@ -96,7 +93,7 @@
 
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-success btn-lg px-5 py-3 me-3 rounded-3 shadow-lg">
-                                    <i class="bi bi-check-circle-fill me-2 fs-5"></i>حفظ التعديلات
+                                    <i class="bi bi-check-circle-fill me-2 fs-5"></i>حفظ السيارة
                                 </button>
                                 <a href="{{ route('admin-dashboard') }}" class="btn btn-outline-secondary btn-lg px-5 py-3 rounded-3">
                                     <i class="bi bi-arrow-left me-2"></i>العودة للوحة التحكم

@@ -52,7 +52,7 @@
             <div class="mb-3">
                 <label for="police_station" class="form-label"> عنوان قسم الشرطه:</label>
                 <select name="police_station_id" class="form-control" id="police_station" required>
-                    @foreach ($PoliceStation as $station)
+                    @foreach ($policeStations as $station)
                         <option value="{{ $station->id }}">{{ $station->address }}</option>
                     @endforeach
                 </select>

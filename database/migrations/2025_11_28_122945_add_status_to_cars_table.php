@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('user')->after('email'); // إضافة العمود بعد عمود البريد الإلكتروني
+        Schema::table('cars', function (Blueprint $table) {
+            $table->enum('status', ['stored', 'found'])->default('stored')->after('police_station_id');
+            $table->timestamp('found_at')->nullable()->after('status');
         });
     }
 
@@ -21,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+        Schema::table('cars', function (Blueprint $table) {
+            $table->dropColumn(['status', 'found_at']);
         });
     }
 };

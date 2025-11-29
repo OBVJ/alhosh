@@ -8,22 +8,13 @@
     <!-- ربط ملف CSS مخصص (إذا كان موجودًا) -->
     <link rel="stylesheet" href="\assets\css\bootstrap.min.css">
     <link rel="stylesheet" href="\assets\bootstrap-icons-1.11.3\font\bootstrap-icons.min.css">
+    <link rel="stylesheet" href="\assets\css\custom.css">
     
 </head>    
     <body dir="rtl">
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="{{ route('index') }}">البحث عن السيارات المفقودة</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">الرئيسية</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('search') }}">بحث</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">لوحة التحكم</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="min-h-screen bg-gray-100">
+            @include('layout.navigation')
+     
     
         <div class="container mt-4">
             @yield('content')
