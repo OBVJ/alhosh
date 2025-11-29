@@ -79,11 +79,13 @@
                                 <input type="email" class="form-control" id="user_email" name="user_email" placeholder="أدخل بريدك الإلكتروني" required>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-check d-flex align-items-center h-100">
-                                    <input class="form-check-input me-2" type="checkbox" name="subscribe_notifications" value="1" id="subscribeCheck" checked>
-                                    <label class="form-check-label fw-bold" for="subscribeCheck">
-                                        اشتراك في الإشعارات
-                                    </label>
+                                <div class="d-flex align-items-center h-100">
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" type="checkbox" name="subscribe_notifications" value="1" id="subscribeCheck" checked>
+                                        <label class="form-check-label fw-bold" for="subscribeCheck">
+                                            اشتراك في الإشعارات
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
