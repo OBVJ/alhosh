@@ -38,9 +38,9 @@
                         <p class="text-muted small mb-3">
                             اشترك ليصلك إشعار فوري عند العثور على سيارتك المفقودة
                         </p>
-                        <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                        <a href="{{ route('subscribe-notifications') }}" class="btn btn-outline-info btn-sm">
                             <i class="bi bi-envelope-plus me-1"></i>اشتراك في الإشعارات
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

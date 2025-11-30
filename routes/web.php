@@ -22,6 +22,9 @@ Route::get('/', [CarController::class, 'index'])->name('index');
 // تأكد أن نموذج البحث يستخدم طريقة GET.
 Route::get('/search', [CarController::class, 'search'])->name('search');
 
+// صفحة الاشتراك في الإشعارات
+Route::get('/subscribe-notifications', [CarController::class, 'subscribeNotifications'])->name('subscribe-notifications');
+
 // صفحة التحقق من الإشعارات
 Route::get('/notifications', [CarController::class, 'checkNotifications'])->name('notifications');
 

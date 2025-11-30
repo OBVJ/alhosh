@@ -134,6 +134,16 @@ class CarController extends Controller
         }
     }
 
+    // صفحة الاشتراك في الإشعارات
+    public function subscribeNotifications()
+    {
+        try {
+            return view('subscribe-notifications');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'حدث خطأ أثناء تحميل صفحة الاشتراك: ' . $e->getMessage());
+        }
+    }
+
     // التحقق من الإشعارات
     public function checkNotifications(Request $request)
     {
